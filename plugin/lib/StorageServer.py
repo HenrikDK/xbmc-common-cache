@@ -68,7 +68,7 @@ class StorageServer():
 
         self.settings = self.xbmcaddon.Addon(id='script.common.plugin.cache.beta')
 
-        self.path = self.xbmc.translatePath(self.settings.getAddonInfo("profile")).decode("utf-8")
+        self.path = self.xbmc.translatePath('special://temp/').decode("utf-8")
         if not self.xbmcvfs.exists(self.path):
             self._log("Making path structure: " + repr(self.path))
             self.xbmcvfs.mkdir(self.path)
