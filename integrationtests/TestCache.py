@@ -14,9 +14,6 @@ class TestCacheCore(BaseTestCase.BaseTestCase):
         if os.path.exists("./tmp/commoncache.db"):
             print "DELETING db"
             os.remove("./tmp/commoncache.db")
-        #if os.path.exists("./tmp/commoncache.socket"):
-        #    print "DELETING socket"
-        #    os.remove("./tmp/commoncache.socket")
 
         super(self.__class__, self).setUp()
         reload(self.StorageServer)
