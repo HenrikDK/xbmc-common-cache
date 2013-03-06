@@ -33,8 +33,8 @@ except: pass
 
 class StorageServer():
     def __init__(self, table=None, timeout=24, instance=False):
-        self.version = u"1.5.0"
-        self.plugin = u"StorageClient Beta-" + self.version
+        self.version = u"2.5.1"
+        self.plugin = u"StorageClient-" + self.version
         self.instance = instance
         self.die = False
 
@@ -66,7 +66,7 @@ class StorageServer():
             import xbmcaddon
             self.xbmcaddon = xbmcaddon
 
-        self.settings = self.xbmcaddon.Addon(id='script.common.plugin.cache.beta')
+        self.settings = self.xbmcaddon.Addon(id='script.common.plugin.cache')
 
         self.path = self.xbmc.translatePath('special://temp/')
         if not self.xbmcvfs.exists(self.path):
@@ -727,7 +727,7 @@ def checkInstanceMode():
     else:
         import xbmcaddon
 
-    settings = xbmcaddon.Addon(id='script.common.plugin.cache.beta')
+    settings = xbmcaddon.Addon(id='script.common.plugin.cache')
     if settings.getSetting("autostart") == "false":
         s = StorageServer(table=False, instance=True)
         print u" StorageServer Module loaded RUN(instance only)"
