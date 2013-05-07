@@ -7,8 +7,7 @@
     <string id="005">Listen on Port (Windows only)</string>
 
 
-    <string id="100">Error. Port already used</string>
-    <string id="101">Error. Socket already used</string>
+    <string id="100">Error.</string>
 
-    <string id="200">Another instance of xbmc already running</string>
+    <string id="200">Failed to start commoncache. Check log.</string>
 </strings>
