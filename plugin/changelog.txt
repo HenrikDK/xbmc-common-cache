@@ -1,3 +1,8 @@
+[B]TODO:[/B]
+- User selectable port on windows + proper notification of failure.
+
+[B]Version 1.5.2[/B]
+- Fixed: Dharma error with sqlite. [mswiege]
 
 [B]Version 1.5.1[/B]
 - Fixed: Move position of socket and database file back
