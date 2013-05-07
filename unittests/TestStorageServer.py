@@ -71,6 +71,7 @@ class TestStorageServer(BaseTestCase.BaseTestCase):
         storage = StorageServer.StorageServer()
         storage._log = Mock()
         storage._log.side_effect = sys.modules["__main__"].log_override.log
+        sys.modules["__main__"].xbmcaddon.Addon().getSetting.return_value = "59994"
         storage.platform = "win32"
 
         storage._sock_init()
@@ -203,6 +204,7 @@ class TestStorageServer(BaseTestCase.BaseTestCase):
 
         dummy_socket = Mock()
         dummy_socket.accept.return_value = ("bla", "127.0.0.1" )
+        sys.modules["__main__"].xbmcaddon.Addon().getSetting.return_value = "59994"
         sys.modules["socket"].socket.return_value = dummy_socket
 
         storage._startDB = Mock()
@@ -267,7 +269,7 @@ class TestStorageServer(BaseTestCase.BaseTestCase):
         dummy_socket.accept.return_value = {'text': 'socket_error', 'errno': 11}
         dummy_socket.accept.side_effect = socket.error
         sys.modules["socket"].socket.return_value = dummy_socket
-
+        sys.modules["__main__"].xbmcaddon.Addon().getSetting.return_value = "59994"
         storage.soccon = Mock()
         storage.platform = "win32"
 
@@ -303,6 +305,7 @@ class TestStorageServer(BaseTestCase.BaseTestCase):
         dummy_socket.accept = Mock()
         dummy_socket.accept.return_value = (True, "mock")
         sys.modules["socket"].socket.return_value = dummy_socket
+        sys.modules["__main__"].xbmcaddon.Addon().getSetting.return_value = "59994"
 
         storage.soccon = Mock()
         storage.platform = "win32"
@@ -913,6 +916,7 @@ class TestStorageServer(BaseTestCase.BaseTestCase):
         dummy_socket.return_value = "connect"
         sys.modules["socket"].socket.return_value = dummy_socket
         sys.modules["socket"].socket.connect.return_value = "connect"
+        sys.modules["__main__"].xbmcaddon.Addon().getSetting.return_value = "59994"
 
         storage = StorageServer.StorageServer()
         storage.soccon = Mock()
