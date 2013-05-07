@@ -208,7 +208,7 @@ class StorageServer():
             if self.platform == "win32":
                 self._showMessage(self.language(100), self.language(200))
             else:
-                self._showMessage(self.language(101), self.language(201))
+                self._showMessage(self.language(101), self.language(200))
 
             return False
 

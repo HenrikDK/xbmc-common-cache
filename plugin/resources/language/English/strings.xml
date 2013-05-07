@@ -10,6 +10,5 @@
     <string id="100">Error. Port already used</string>
     <string id="101">Error. Socket already used</string>
 
-    <string id="200">Change the commoncache listen port in settings</string>
-    <string id="201">Another instance of xbmc already running</string>
+    <string id="200">Another instance of xbmc already running</string>
 </strings>
