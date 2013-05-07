@@ -113,7 +113,7 @@ class StorageServer():
 
             self.curs = self.conn.cursor()
             return True
-        except sqlite.Error, e:
+        except Exception, e:
             self._log("Exception: " + repr(e))
             self.xbmcvfs.delete(self.path)
             return False
