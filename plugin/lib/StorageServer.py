@@ -33,7 +33,7 @@ except: pass
 
 class StorageServer():
     def __init__(self, table=None, timeout=24, instance=False):
-        self.version = u"1.5.0"
+        self.version = u"1.5.2"
         self.plugin = u"StorageClient Beta-" + self.version
         self.instance = instance
         self.die = False
