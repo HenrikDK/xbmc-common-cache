@@ -21,7 +21,7 @@ import xbmc
 import xbmcaddon
 import xbmcvfs
 
-settings = xbmcaddon.Addon(id='script.common.plugin.cache.beta')
+settings = xbmcaddon.Addon(id='script.common.plugin.cache')
 dbg = settings.getSetting("debug") == "true"
 dbglevel = 3
 
