@@ -33,7 +33,7 @@ except: pass
 
 class StorageServer():
     def __init__(self, table=None, timeout=24, instance=False):
-        self.version = u"2.5.1"
+        self.version = u"2.5.2"
         self.plugin = u"StorageClient-" + self.version
         self.instance = instance
         self.die = False
@@ -67,6 +67,7 @@ class StorageServer():
             self.xbmcaddon = xbmcaddon
 
         self.settings = self.xbmcaddon.Addon(id='script.common.plugin.cache')
+        self.language = self.settings.getLocalizedString
 
         self.path = self.xbmc.translatePath('special://temp/')
         if not self.xbmcvfs.exists(self.path):
@@ -113,7 +114,7 @@ class StorageServer():
 
             self.curs = self.conn.cursor()
             return True
-        except sqlite.Error, e:
+        except Exception, e:
             self._log("Exception: " + repr(e))
             self.xbmcvfs.delete(self.path)
             return False
@@ -132,8 +133,8 @@ class StorageServer():
             self._log("Checking", 4)
             if self.platform == "win32":
                 self._log("Windows", 4)
-                port = 59994
-                self.socket = ("127.0.0.1", port)
+                port = self.settings.getSetting("port")
+                self.socket = ("127.0.0.1", int(port))
             else:
                 self._log("POSIX", 4)
                 self.socket = os.path.join(self.xbmc.translatePath('special://temp/').decode("utf-8"), 'commoncache.socket')
@@ -182,6 +183,11 @@ class StorageServer():
 
         self._log("Done", 3)
 
+    def _showMessage(self, heading, message):
+        self._log(repr(type(heading)) + " - " + repr(type(message)))
+        duration = 10 * 1000
+        self.xbmc.executebuiltin((u'XBMC.Notification("%s", "%s", %s)' % (heading, message, duration)).encode("utf-8"))
+
     def run(self):
         self.plugin = "StorageServer-" + self.version
         print self.plugin + " Storage Server starting " + self.path
@@ -195,7 +201,14 @@ class StorageServer():
         else:
             sock = socket.socket(socket.AF_UNIX)
 
-        sock.bind(self.socket)
+        try:
+            sock.bind(self.socket)
+        except Exception, e:
+            self._log("Exception: " + repr(e))
+            self._showMessage(self.language(100), self.language(200))
+
+            return False
+
         sock.listen(1)
         sock.setblocking(0)
 
