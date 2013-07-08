@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<addon id='script.common.plugin.cache.beta' version='1.5.2' name='Common plugin cache Beta' provider-name='TheCollective'>
+<addon id='script.common.plugin.cache.beta' version='1.5.0' name='Common plugin cache Beta' provider-name='TheCollective'>
   <requires>
     <import addon='xbmc.python' version='2.1.0'/>
   </requires>
