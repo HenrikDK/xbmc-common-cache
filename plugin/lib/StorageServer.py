@@ -24,6 +24,7 @@ import time
 import hashlib
 import inspect
 import string
+import xbmc
 
 try: import sqlite
 except: pass
@@ -131,8 +132,8 @@ class StorageServer():
         self._log("", 2)
         if not self.socket or check_stale:
             self._log("Checking", 4)
-            if self.platform == "win32":
-                self._log("Windows", 4)
+            if self.platform == "win32" or xbmc.getCondVisibility('system.platform.android'):
+                self._log("Windows/Android", 4)
                 port = self.settings.getSetting("port")
                 self.socket = ("127.0.0.1", int(port))
             else:
@@ -196,7 +197,7 @@ class StorageServer():
         if not self._startDB():
             self._startDB()
 
-        if self.platform == "win32":
+        if self.platform == "win32" or xbmc.getCondVisibility('system.platform.android'):
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         else:
             sock = socket.socket(socket.AF_UNIX)
@@ -251,7 +252,7 @@ class StorageServer():
         self._log("Closing down")
         sock.close()
         # self.conn.close()
-        if not self.platform == "win32":
+        if not self.platform == "win32" and not xbmc.getCondVisibility('system.platform.android'):
             if self.xbmcvfs.exists(self.socket):
                 self._log("Deleting socket file")
                 self.xbmcvfs.delete(self.socket)
@@ -643,7 +644,7 @@ class StorageServer():
     def _connect(self):
         self._log("", 3)
         self._sock_init()
-        if self.platform == "win32":
+        if self.platform == "win32" or xbmc.getCondVisibility('system.platform.android'):
             self.soccon = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         else:
             self.soccon = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
